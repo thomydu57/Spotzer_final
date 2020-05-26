@@ -29,8 +29,47 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class listImport extends StatelessWidget {
+class listImport extends StatefulWidget {
   @override
+  State<StatefulWidget> createState() {
+    new _listImport();
+  }
+}
+
+class _listImport extends State<listImport> {
+  var list;
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+
+  Future<Null> refreshList() async {
+    refreshKey.currentState?.show(atTop: false);
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {
+      //list = List.generate(random.nextInt(10), (i) => "Item $i");
+      list = MyApp.b.getListImports;
+    });
+
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Import de bons sons"),
+        ),
+        body: RefreshIndicator(
+          key: refreshKey,
+          child: ListView.builder(
+            itemCount: list?.length,
+            itemBuilder: (context, i) => ListTile(
+                title: Text(list[i]),
+            ),),
+    onRefresh: refreshList,));
+
+  }
+
+/*@override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -57,12 +96,8 @@ class listImport extends StatelessWidget {
             ),
           ],
         )));
-  }
+  }*/
 
-  Column lesImports()
-  {
-
-  }
 }
 
 class MyHomePage extends StatefulWidget {

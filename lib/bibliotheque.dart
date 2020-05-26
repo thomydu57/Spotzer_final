@@ -428,6 +428,6 @@ class Bibliotheque {
   List<Morceau> get getListMorceaux => listeMorceaux;
   List<Genre> get getListGenres => listeGenres;
   List<Playlist> get getListPlaylists => listePlaylists;
-
+  List<String> get getListImports => listeImports;
 
 }
