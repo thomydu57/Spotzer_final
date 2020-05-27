@@ -44,6 +44,7 @@ class Playlist {
 		this.titrePlaylist = titrePlaylist;
 		this.descriptionPlaylist = descriptionPlaylist;
 		etatMetier = Bibliotheque.CREE;
+    morceauxPlaylist= new List<Morceau>();
   }
   /////////////////
   //// GETTERS ////

@@ -73,7 +73,8 @@ class Bibliotheque {
     listeImports.add("Poison.mp3");
     listeImports.add("Une_Etincelle.mp3");
 
-
+    listePlaylists.add(new Playlist('Ma playlist 1', "Demo 1"));
+    listePlaylists.add(new Playlist('Ma playlist 2', "Demo 2"));
   }
 
   Future<void> connexionEtTralala()
@@ -353,12 +354,12 @@ class Bibliotheque {
         e.printStackTrace();
       }
       // Chemin Morceau
-      morceaump3.cheminMorceau = filemp3.toString();
+      morceaump3.cheminMorceau = mp3;
       
-      morceaump3.cheminMorceau=morceaump3.cheminMorceau.replaceAll('import', 'bibliotheque');
-      morceaump3.cheminMorceau=morceaump3.cheminMorceau.replaceAll('File: \'','');
+      //morceaump3.cheminMorceau=morceaump3.cheminMorceau.replaceAll('import', 'bibliotheque');
+      //morceaump3.cheminMorceau=morceaump3.cheminMorceau.replaceAll('File: \'','');
       //morceaump3.cheminMorceau=morceaump3.cheminMorceau.substring(0,morceaump3.cheminMorceau.length-1);
-      print('NOUVEAU CHEMIN'+morceaump3.cheminMorceau);
+      print('NOUVEAU CHEMIN: '+morceaump3.cheminMorceau);
       /*try {
 				File rep = new File("./bibliotheque");
         

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -32,12 +33,13 @@ class MyApp extends StatelessWidget {
 class listImport extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    new _listImport();
+    return new _listImport();
   }
 }
 
 class _listImport extends State<listImport> {
-  var list;
+  var list = MyApp.b.getListImports;
+  var random = Random();
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
   Future<Null> refreshList() async {
@@ -63,40 +65,19 @@ class _listImport extends State<listImport> {
           child: ListView.builder(
             itemCount: list?.length,
             itemBuilder: (context, i) => ListTile(
-                title: Text(list[i]),
-            ),),
-    onRefresh: refreshList,));
-
+              title: Text(list[i]),
+              onTap: () {
+                MyApp.b.ajouterUnMorceau(list[i]);
+                MyApp.b.listeImports.remove(list[i]);
+                refreshList();
+              },
+            ),
+          ),
+          onRefresh: refreshList,
+        ));
   }
 
-/*@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Import de bons sons"),
-        ),
-        body: Center(
-            child: Column(
-          children: <Widget>[
-            new RaisedButton(
-              child: Text("Poison _ De : Ana Poison"),
-              onPressed: () {},
-            ),
-            new RaisedButton(
-              child: Text("Gerard _ De : Sac à boulons"),
-              onPressed: () {},
-            ),
-            new RaisedButton(
-              child: Text("Une étincelle _ De : Law"),
-              onPressed: () {},
-            ),
-            new RaisedButton(
-              child: Text("Aeris Beats _ De : Chill Trap"),
-              onPressed: () {},
-            ),
-          ],
-        )));
-  }*/
+
 
 }
 
@@ -115,9 +96,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  StatefulWidget actualState = new pageLecture();
+
   int _selectedIndex = 0;
   Bibliotheque b = new Bibliotheque();
+
+  static var pLecture = new pageLecture();
+  static var pRecherche = new pageRecherche();
+  static var pBibliotheque = new pageBibliotheque();
+  StatefulWidget actualState = pLecture;
 
   @override
   Widget build(BuildContext context) {
@@ -214,13 +200,13 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
       switch (index) {
         case 0:
-          actualState = new pageLecture();
+          actualState = pLecture;
           break;
         case 1:
-          actualState = new pageBibliotheque();
+          actualState = pBibliotheque;
           break;
         case 2:
-          actualState = new pageRecherche();
+          actualState = pRecherche;
           break;
       }
     });

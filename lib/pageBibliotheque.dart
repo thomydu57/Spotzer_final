@@ -128,7 +128,6 @@ class _PageBibliotheque extends State<pageBibliotheque> {
     String res = "";
     print(MyApp.b.getListGenres.length);
     for (Morceau m in MyApp.b.getListMorceaux) {
-      print("MA BITE");
       res += m.toLabel();
     }
 
@@ -149,7 +148,16 @@ class _PageBibliotheque extends State<pageBibliotheque> {
           ),
           new Card(
               child: new IconButton(
-                  icon: new Icon(Icons.more_vert), onPressed: null)) /*)*/
+                  icon: new Icon(Icons.add), onPressed: () {
+                    showDialog(context: context, builder: (BuildContext context){return AlertDialog(
+                      title: new Text("Ajout a une playlist"),
+                      content: new Column(children: <Widget>[
+                        new RaisedButton(onPressed: (){MyApp.b.listePlaylists.elementAt(0).ajoutMorceauPlaylist(m);Navigator.of(context).pop();},child: new Text('Ma playlist 1')),
+                        new RaisedButton(onPressed: (){MyApp.b.listePlaylists.elementAt(1).ajoutMorceauPlaylist(m);Navigator.of(context).pop();},child: new Text('Ma playlist 2')),
+                      ],)
+                    );},);
+                
+              })) /*)*/
         ],
       ));
     }
